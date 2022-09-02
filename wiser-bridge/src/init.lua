@@ -2,6 +2,12 @@
 local capabilities = require "st.capabilities"
 local Driver = require "st.driver"
 local log = require "log"
+local socket = require'socket'
+local json = require "dkjson"
+local cosock = require "cosock"
+local http = cosock.asyncify "socket.http"
+ltn12 = require("ltn12")
+
 
 -- require custom handlers from driver package
 local command_handlers = require "command_handlers"
