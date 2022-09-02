@@ -1,11 +1,12 @@
 # wiser-bridge
 name: wiser-bridge.v1
 components:
-- id: testbutton
-  label: TestButton
+- id: main
   capabilities:
-  - id: momentary
+  - id: switch
     version: 1
+  categories:
+  - name: Light
 metadata:
   mnmn: SmartThingsCommunity
   ocfDeviceType: x.com.st.d.remotecontroller  
