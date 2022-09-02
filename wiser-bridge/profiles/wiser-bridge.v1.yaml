@@ -1,0 +1,22 @@
+# wiser-bridge
+name: wiser-bridge.v1
+components:
+- id: testbutton
+  label: TestButton
+  capabilities:
+  - id: momentary
+    version: 1
+metadata:
+  mnmn: SmartThingsCommunity
+  ocfDeviceType: x.com.st.d.remotecontroller  
+preferences:
+  - title: "IP Address"
+    name: deviceaddr
+    description: "IP address of the WiserHeatHub"
+    required: true
+    preferenceType: string
+    definition:
+      minLength: 7
+      maxLength: 15
+      stringType: text
+      default: "192.168.1.n"
