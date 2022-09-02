@@ -6,6 +6,7 @@ local wiser = {}
 -- callback to handle an `on` capability command
 function wiser.makeApiGetCall(driver,device,path)
   local url = "http://"..device.preferences.deviceaddr..path
+  local secret = device.preferences.secret
   log.debug("Making API Call to ",url)
   local respbody = {} -- for the response body
   http.TIMEOUT = 50;

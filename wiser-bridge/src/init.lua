@@ -35,7 +35,7 @@ end
 -- this is called when a device setting is changed
 local function device_info_changed(driver, device, event, args)
       if args.old_st_store.preferences.deviceaddr ~= device.preferences.deviceaddr then
-        log.info("Wiser device address preference changed - "..device.preferences.secret)
+        log.info("Wiser device address preference changed - "..device.preferences.deviceaddr)
       end
       if args.old_st_store.preferences.secret ~= device.preferences.secret then
         log.info("Wiser secret preference changed - "..device.preferences.secret)
