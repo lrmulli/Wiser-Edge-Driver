@@ -5,6 +5,7 @@ local log = require "log"
 
 -- require custom handlers from driver package
 local command_handlers = require "command_handlers"
+local wiser = require "wiser"
 local discovery = require "discovery"
 
 -----------------------------------------------------------------
@@ -31,13 +32,25 @@ local function device_removed(driver, device)
   log.info("[" .. device.id .. "] Removing Wiser device")
 end
 
+-- this is called when a device setting is changed
+local function device_info_changed(driver, device, event, args)
+      if args.old_st_store.preferences.deviceaddr ~= device.preferences.deviceaddr then
+        log.info("Wiser device address preference changed - "..device.preferences.secret)
+      end
+      if args.old_st_store.preferences.secret ~= device.preferences.secret then
+        log.info("Wiser secret preference changed - "..device.preferences.secret)
+      end
+      wiser.makeApiGetCall(driver,device,"/data/domain/System/")
+  end
+
 -- create the driver object
 local wiser_driver = Driver("org.mullineux.wiserbridge.v1", {
   discovery = discovery.handle_discovery,
   lifecycle_handlers = {
     added = device_added,
     init = device_init,
-    removed = device_removed
+    removed = device_removed,
+    infoChanged = device_info_changed
   },
   capability_handlers = {
     [capabilities.switch.ID] = {
