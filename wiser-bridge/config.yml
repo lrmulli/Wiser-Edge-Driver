@@ -1,0 +1,5 @@
+name: 'Wiser Bridge'
+packageKey: 'org.mullineux.wiserbridge.v1'
+permissions:
+  lan: {}
+  discovery: {}
