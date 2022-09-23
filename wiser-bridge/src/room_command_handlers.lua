@@ -40,7 +40,8 @@ function room_command_handlers.switch_on(driver, device, command)
       log.debug("Changing device profile")
       device:try_update_metadata({profile = "wiser-bridge.room_with_stat.v1"})
     end
-
+    local humidity = {value = update.MeasuredHumidity, unit = "%"}
+    device:emit_component_event(device.profile.components.relativehumidity,capabilities.relativeHumidityMeasurement.humidity(humidity))
 
   end
 
