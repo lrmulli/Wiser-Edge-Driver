@@ -49,6 +49,14 @@ local function device_info_changed(driver, device, event, args)
       end
   end
 
+
+local function poll(driver,device)
+  if device.preferences.deviceaddr ~= "192.168.1.n" then
+    --we have an ip address
+    wiser.refreshRooms(driver,device)
+  end
+  driver:call_with_delay(30, function () poll(driver,device) end, 'START TIMER')
+end
 -- create the driver object
 local wiser_driver = Driver("org.mullineux.wiserbridge.v1", {
   discovery = discovery.handle_discovery,
@@ -68,3 +76,5 @@ local wiser_driver = Driver("org.mullineux.wiserbridge.v1", {
 
 -- run the driver
 wiser_driver:run()
+
+wiser_driver:call_with_delay(30, function () poll(wiser_driver,device) end, 'START TIMER')
