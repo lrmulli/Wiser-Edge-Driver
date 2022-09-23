@@ -32,7 +32,9 @@ local function device_init(driver, device)
 
   -- mark device as online so it can be controlled from the app
   device:online()
-  driver:call_on_schedule(60, function () poll(driver,device) end, 'POLLING')
+  if (device:component_exists("bridgelogger")) then --this means that it is a wiser bridge
+    driver:call_on_schedule(60, function () poll(driver,device) end, 'POLLING')
+  end
 end
 
 -- this is called when a device is removed by the cloud and synchronized down to the hub
