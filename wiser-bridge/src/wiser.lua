@@ -51,7 +51,7 @@ function wiser.createRooms(driver,device)
           profile = "wiser-bridge.room.v1",
           manufacturer = "Wiser",
           model = "Wiser Room",
-          vendor_provided_label = r.id,
+          vendor_provided_label = "room_"..r.id,
           parent_device_id = device.id
         }
         --make some rooms
