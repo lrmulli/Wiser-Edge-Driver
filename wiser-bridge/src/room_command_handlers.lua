@@ -24,7 +24,11 @@ function room_command_handlers.switch_on(driver, device, command)
     log.info(utils.stringify_table(update,"Room Update Message: ",true))
     --set current temperature
     local temp = update.CalculatedTemperature / 10
-    device:emit_component_event(device.profile.components.roomtemperature,capabilities.temperatureMeasurement.temperature(temp,"C"))
+    local temp = {
+        value = update.CalculatedTemperature / 10,
+        unit = "C"
+    }
+    device:emit_component_event(device.profile.components.roomtemperature,capabilities.temperatureMeasurement.temperature(temp))
 
   end
 
