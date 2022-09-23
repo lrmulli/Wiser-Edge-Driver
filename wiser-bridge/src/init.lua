@@ -59,9 +59,8 @@ local wiser_driver = Driver("org.mullineux.wiserbridge.v1", {
     infoChanged = device_info_changed
   },
   capability_handlers = {
-    [capabilities.switch.ID] = {
-      [capabilities.switch.commands.on.NAME] = command_handlers.switch_on,
-      [capabilities.switch.commands.off.NAME] = command_handlers.switch_off,
+    [capabilities.momentary.ID] = {
+      [capabilities.switch.commands.push.NAME] = command_handlers.push
     },
   },
   sub_drivers = { require("room")}

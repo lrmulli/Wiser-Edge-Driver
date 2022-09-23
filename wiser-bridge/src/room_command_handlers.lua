@@ -27,7 +27,7 @@ function room_command_handlers.switch_on(driver, device, command)
     device:emit_event(capabilities.temperatureMeasurement.temperature(temp))
     --set set point temperature
     local setpoint = {value = update.CurrentSetPoint / 10, unit = "C"}
-    device:emit_component_event(device.profile.components.thermostatsetpoint,capabilities.thermostatHeatingSetpoint.heatingSetpoint(temp))
+    device:emit_component_event(device.profile.components.thermostatsetpoint,capabilities.thermostatHeatingSetpoint.heatingSetpoint(setpoint))
   end
 
 return room_command_handlers

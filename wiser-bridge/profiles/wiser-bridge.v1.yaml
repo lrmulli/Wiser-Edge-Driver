@@ -3,7 +3,7 @@ name: wiser-bridge.v1
 components:
 - id: main
   capabilities:
-  - id: switch
+  - id: momentary
     version: 1
 - id: bridgelogger
   label: bridgelogger
