@@ -5,7 +5,7 @@ local json = require "dkjson"
 local cosock = require "cosock"
 local http = cosock.asyncify "socket.http"
 ltn12 = require("ltn12")
-
+local utils = require "st.utils"
 local wiser = {}
 local room_command_handlers = require "room_command_handlers"
 

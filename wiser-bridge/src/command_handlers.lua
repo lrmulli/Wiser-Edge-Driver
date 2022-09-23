@@ -1,7 +1,7 @@
 local log = require "log"
 local capabilities = require "st.capabilities"
 local wiser = require "wiser"
-
+local utils = require "st.utils"
 local command_handlers = {}
 
 -- callback to handle an `on` capability command

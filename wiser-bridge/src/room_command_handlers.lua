@@ -1,6 +1,6 @@
 local log = require "log"
 local capabilities = require "st.capabilities"
-
+local utils = require "st.utils"
 local room_command_handlers = {}
 
 -- callback to handle an `on` capability command
