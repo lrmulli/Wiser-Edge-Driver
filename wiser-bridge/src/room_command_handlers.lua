@@ -35,7 +35,7 @@ function room_command_handlers.switch_on(driver, device, command)
         device:emit_component_event(device.profile.components.roomlogger,logger.logger(utils.stringify_table(update,"Room Update Message: ",true)))
     end
     log.info(utils.stringify_table(update,"Room Update Message: ",true))
-    log.info(d.profile)
+    log.info(device.profile)
   end
 
 return room_command_handlers
