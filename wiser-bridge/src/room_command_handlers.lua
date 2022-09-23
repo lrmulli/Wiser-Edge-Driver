@@ -35,7 +35,7 @@ function room_command_handlers.switch_on(driver, device, command)
         device:emit_component_event(device.profile.components.roomlogger,logger.logger(utils.stringify_table(update,"Room Update Message: ",true)))
     end
     log.info(utils.stringify_table(update,"Room Update Message: ",true))
-    if (device:component_exists("relativehumidity") != true) then
+    if (device:component_exists("relativehumidity") ~= true) then
       --this device has the wrong profile - lets try to fix it
       device:try_update_metadata({profile = "wiser-bridge.room_with_stat.v1"})
     end
