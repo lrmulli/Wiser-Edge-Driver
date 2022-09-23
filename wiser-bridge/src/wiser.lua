@@ -31,7 +31,15 @@ function wiser.makeApiGetCall(driver,device,path)
   print(result,respcode,respstatus)
   return respbody
 end
-function wiser.createRooms(driver,device,payload)
+function wiser.createRooms(driver,device)
+  local payload = wiser.makeApiGetCall(driver,device,"/data/domain/")
+  local wiserdata = json.decode(payload)
+  if wiserdata.Room ~= nil then
+    --the room object is not empty
+    for _, r in ipairs(wiserdata.Room) do
+      log.debug("Processing Room: "..r.Name)
+    end
+  end
   --make some rooms
   local dni = "WiserRoom_".."123"
   local roomname = "yard"
