@@ -7,6 +7,8 @@ local command_handlers = {}
 function command_handlers.switch_on(driver, device, command)
   log.debug(string.format("[%s] calling set_power(on)", device.device_network_id))
   device:emit_event(capabilities.switch.switch.on())
+  local payload = wiser.makeApiGetCall(driver,device,"/data/domain/System/")
+  wiser.createRooms(driver,device,payload)
 end
 
 -- callback to handle an `off` capability command

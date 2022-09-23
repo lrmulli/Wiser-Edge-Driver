@@ -46,8 +46,6 @@ local function device_info_changed(driver, device, event, args)
       if args.old_st_store.preferences.secret ~= device.preferences.secret then
         log.info("Wiser secret preference changed - "..device.preferences.secret)
       end
-      local payload = wiser.makeApiGetCall(driver,device,"/data/domain/System/")
-      wiser.createRooms(driver,device,payload)
   end
 
 -- create the driver object
