@@ -37,25 +37,29 @@ function wiser.createRooms(driver,device)
   if wiserdata.Room ~= nil then
     --the room object is not empty
     for _, r in ipairs(wiserdata.Room) do
-      log.debug("Processing Room: "..r.Name)
+      if(r.CalculatedTemperature == -32768) then
+        log.debug("Not Processing Room: "..r.Name.." Invalid Temperature")
+      else
+        log.debug("Processing Room: "..r.Name)
+        local dni = "WiserRoom_"..r.id
+        local roomname = r.name
+        local roomid = r.id
+        local metadata = {
+          type = "LAN",
+          -- the DNI must be unique across your hub, using static ID here so that we
+          -- only ever have a single instance of this "device"
+          device_network_id = dni,
+          label = "Wiser Room: "..roomname,
+          profile = "wiser-bridge.room.v1",
+          manufacturer = "Wiser",
+          model = "Wiser Room",
+          vendor_provided_label = roomid,
+          parent_device_id = device.id
+        }
+        --make some rooms
+        driver:try_create_device(metadata)
+      end
     end
   end
-  --make some rooms
-  local dni = "WiserRoom_".."123"
-  local roomname = "yard"
-  local roomid = "1"
-  local metadata = {
-    type = "LAN",
-    -- the DNI must be unique across your hub, using static ID here so that we
-    -- only ever have a single instance of this "device"
-    device_network_id = dni,
-    label = "Wiser Room: "..roomname,
-    profile = "wiser-bridge.room.v1",
-    manufacturer = "Wiser",
-    model = "Wiser Room",
-    vendor_provided_label = roomid,
-    parent_device_id = device.id
-  }
-  driver:try_create_device(metadata)
 end
 return wiser
