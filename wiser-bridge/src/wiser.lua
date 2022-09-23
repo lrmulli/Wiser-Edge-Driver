@@ -80,15 +80,14 @@ function wiser.refreshRooms(driver,device)
                 --this is the correct room
                 if r.RoomStatId ~= nil then
                   log.info(r.Name.." has a roomstat")
-                  for _, rs in ipairs(r.RoomStat) do
+                  for _, rs in ipairs(wiser.RoomStat) do
                     if r.RoomStatId == rs.id then
                       log.info("Matching Roomstat Found: "..utils.stringify_table(roomstat,"Roomstat: ",true))
-                      room_command_handlers.processUpdate(driver, d, r,rs)
+                      --room_command_handlers.processUpdateRoomStat(driver, d,rs)
                     end
                   end
-                else
-                  room_command_handlers.processUpdate(driver, d, r,{})
                 end
+                room_command_handlers.processUpdate(driver, d, r)
               end
           end
         end

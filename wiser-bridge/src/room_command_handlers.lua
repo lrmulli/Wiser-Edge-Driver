@@ -16,7 +16,7 @@ function room_command_handlers.switch_on(driver, device, command)
     device:emit_event(capabilities.switch.switch.off())
   end
 
-  function room_command_handlers.processUpdate(driver, device, update, roomstat)
+  function room_command_handlers.processUpdate(driver, device, update)
     log.debug(string.format("[%s] processing update message", device.device_network_id))
     if (device.preferences.verboserecdlog == true) then
         device:emit_component_event(device.profile.components.roomlogger,logger.logger(utils.stringify_table(update,"Room Update Message: ",true)))
@@ -28,9 +28,6 @@ function room_command_handlers.switch_on(driver, device, command)
     --set set point temperature
     local setpoint = {value = update.CurrentSetPoint / 10, unit = "C"}
     device:emit_component_event(device.profile.components.thermostatsetpoint,capabilities.thermostatHeatingSetpoint.heatingSetpoint(setpoint))
-    if update.RoomStatId ~= nil then
-        log.info(utils.stringify_table(roomstat,"Roomstat: ",true))
-    end
   end
 
 return room_command_handlers
