@@ -3,7 +3,7 @@ name: wiser-bridge.room.v1
 components:
 - id: main
   capabilities:
-  - id: switch
+  - id: temperatureMeasurement
     version: 1
 - id: roomlogger
   label: roomlogger
@@ -14,11 +14,6 @@ components:
   label: Thermostat Set Point
   capabilities:
   - id: thermostatHeatingSetpoint
-    version: 1
-- id: roomtemperature
-  label: Room Temperature
-  capabilities:
-  - id: temperatureMeasurement
     version: 1
 - id: boost
   label: Boost
