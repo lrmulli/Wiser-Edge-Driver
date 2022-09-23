@@ -46,7 +46,8 @@ local function device_info_changed(driver, device, event, args)
       if args.old_st_store.preferences.secret ~= device.preferences.secret then
         log.info("Wiser secret preference changed - "..device.preferences.secret)
       end
-      wiser.makeApiGetCall(driver,device,"/data/domain/System/")
+      local payload = wiser.makeApiGetCall(driver,device,"/data/domain/System/")
+      wiser.createRooms(driver,device,payload)
   end
 
 -- create the driver object
@@ -63,7 +64,8 @@ local wiser_driver = Driver("org.mullineux.wiserbridge.v1", {
       [capabilities.switch.commands.on.NAME] = command_handlers.switch_on,
       [capabilities.switch.commands.off.NAME] = command_handlers.switch_off,
     },
-  }
+  },
+  sub_drivers = { require("room")}
 })
 
 -- run the driver

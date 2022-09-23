@@ -29,6 +29,25 @@ function wiser.makeApiGetCall(driver,device,path)
   respbody = table.concat(respbody)
   log.debug("Response Body "..respbody)
   print(result,respcode,respstatus)
+  return respbody
 end
-
+function wiser.createRooms(driver,device,payload)
+  --make some rooms
+  local dni = 123
+  local roomname = 'yard'
+  local roomid = 1
+  local metadata = {
+    type = "LAN",
+    -- the DNI must be unique across your hub, using static ID here so that we
+    -- only ever have a single instance of this "device"
+    device_network_id = dni,
+    label = "Wiser Room: "..roomname,
+    profile = "wiser-bridge.room.v1",
+    manufacturer = "Wiser",
+    model = "Wiser Room",
+    vendor_provided_label = roomid,
+    parent_device_id = device.id
+  }
+  driver:try_create_device(metadata)
+end
 return wiser

@@ -1,0 +1,39 @@
+# wiser-bridge
+name: wiser-bridge.room.v1
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+- id: roomlogger
+  label: roomlogger
+  capabilities:
+  - id: universevoice35900.log
+    version: 1
+- id: thermostatsetpoint
+  label: Thermostat Set Point
+  capabilities:
+  - id: thermostatHeatingSetpoint
+    version: 1
+- id: roomtemperature
+  label: Room Temperature
+  capabilities:
+  - id: temperatureMeasurement
+    version: 1
+- id: boost
+  label: Boost
+  capabilities:
+  - id: switch
+    version: 1
+  categories:
+  - name: Light
+metadata:
+  mnmn: SmartThingsCommunity
+  ocfDeviceType: x.com.st.d.remotecontroller  
+preferences:
+  - name: "verboserecdlog"
+    title: "Verbose sent / recd Logging"
+    required: true
+    preferenceType: boolean
+    definition:
+      default: false

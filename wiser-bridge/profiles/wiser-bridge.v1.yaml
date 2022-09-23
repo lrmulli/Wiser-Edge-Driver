@@ -5,6 +5,11 @@ components:
   capabilities:
   - id: switch
     version: 1
+- id: bridgelogger
+  label: bridgelogger
+  capabilities:
+  - id: universevoice35900.log
+    version: 1
   categories:
   - name: Light
 metadata:
@@ -30,3 +35,10 @@ preferences:
       minLength: 7
       stringType: text
       default: "put your secret here"
+  - name: "verboserecdlog"
+    title: "Verbose sent / recd Logging"
+    required: true
+    preferenceType: boolean
+    definition:
+      default: false
+  
