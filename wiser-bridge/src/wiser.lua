@@ -42,18 +42,16 @@ function wiser.createRooms(driver,device)
       else
         log.debug("Processing Room: "..r.Name)
         local dni = "WiserRoom_"..r.id
-        local roomname = r.name
-        local roomid = r.id
         local metadata = {
           type = "LAN",
           -- the DNI must be unique across your hub, using static ID here so that we
           -- only ever have a single instance of this "device"
           device_network_id = dni,
-          label = "Wiser Room: "..roomname,
+          label = "Wiser Room: "..r.Name,
           profile = "wiser-bridge.room.v1",
           manufacturer = "Wiser",
           model = "Wiser Room",
-          vendor_provided_label = roomid,
+          vendor_provided_label = r.id,
           parent_device_id = device.id
         }
         --make some rooms
