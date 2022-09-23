@@ -1,5 +1,6 @@
 local log = require "log"
 local capabilities = require "st.capabilities"
+local wiser = require "wiser"
 
 local command_handlers = {}
 
