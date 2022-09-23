@@ -32,7 +32,7 @@ local function device_init(driver, device)
 
   -- mark device as online so it can be controlled from the app
   device:online()
-  driver:call_on_schedule(30, function () poll(driver,device) end, 'POLLING')
+  driver:call_on_schedule(60, function () poll(driver,device) end, 'POLLING')
 end
 
 -- this is called when a device is removed by the cloud and synchronized down to the hub
