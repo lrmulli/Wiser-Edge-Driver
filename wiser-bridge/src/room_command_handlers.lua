@@ -19,7 +19,7 @@ function room_command_handlers.switch_on(driver, device, command)
   function room_command_handlers.processUpdate(driver, device, update)
     log.debug(string.format("[%s] processing update message", device.device_network_id))
     if (device.preferences.verboserecdlog == true) then
-        device:emit_component_event(device.prodile.components.roomlogger,logger.logger(utils.stringify_table(update,"Room Update Message: ",true)))
+        device:emit_component_event(device.profile.components.roomlogger,logger.logger(utils.stringify_table(update,"Room Update Message: ",true)))
     end
     log.info(utils.stringify_table(update,"Room Update Message: ",true))
   end
