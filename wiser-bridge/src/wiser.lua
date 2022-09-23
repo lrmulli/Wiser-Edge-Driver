@@ -33,7 +33,7 @@ function wiser.makeApiGetCall(driver,device,path)
 end
 function wiser.createRooms(driver,device,payload)
   --make some rooms
-  local dni = 123
+  local dni = "123"
   local roomname = 'yard'
   local roomid = 1
   local metadata = {
@@ -48,6 +48,6 @@ function wiser.createRooms(driver,device,payload)
     vendor_provided_label = roomid,
     parent_device_id = device.id
   }
-  --driver:try_create_device(metadata)
+  driver:try_create_device(metadata)
 end
 return wiser
