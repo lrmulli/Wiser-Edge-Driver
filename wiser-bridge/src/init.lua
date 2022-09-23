@@ -32,6 +32,7 @@ local function device_init(driver, device)
 
   -- mark device as online so it can be controlled from the app
   device:online()
+  driver:call_with_delay(30, function () poll(driver,device) end, 'START TIMER')
 end
 
 -- this is called when a device is removed by the cloud and synchronized down to the hub
@@ -76,5 +77,3 @@ local wiser_driver = Driver("org.mullineux.wiserbridge.v1", {
 
 -- run the driver
 wiser_driver:run()
-
-wiser_driver:call_with_delay(30, function () poll(wiser_driver,device) end, 'START TIMER')
