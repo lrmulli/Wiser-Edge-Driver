@@ -14,7 +14,7 @@ components:
   - name: Light
 metadata:
   mnmn: SmartThingsCommunity
-  ocfDeviceType: x.com.st.d.remotecontroller  
+  ocfDeviceType: oic.d.thermostat  
 preferences:
   - title: "IP Address"
     name: deviceaddr

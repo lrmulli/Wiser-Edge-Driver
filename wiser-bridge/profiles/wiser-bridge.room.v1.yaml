@@ -15,16 +15,11 @@ components:
   capabilities:
   - id: thermostatHeatingSetpoint
     version: 1
-- id: boost
-  label: Boost
-  capabilities:
-  - id: switch
-    version: 1
   categories:
-  - name: Light
+  - name: Thermostat
 metadata:
   mnmn: SmartThingsCommunity
-  ocfDeviceType: x.com.st.d.remotecontroller  
+  ocfDeviceType: oic.d.thermostat  
 preferences:
   - name: "verboserecdlog"
     title: "Verbose sent / recd Logging"
