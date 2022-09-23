@@ -33,9 +33,9 @@ function wiser.makeApiGetCall(driver,device,path)
 end
 function wiser.createRooms(driver,device,payload)
   --make some rooms
-  local dni = "123"
-  local roomname = 'yard'
-  local roomid = 1
+  local dni = "WiserRoom_".."123"
+  local roomname = "yard"
+  local roomid = "1"
   local metadata = {
     type = "LAN",
     -- the DNI must be unique across your hub, using static ID here so that we
