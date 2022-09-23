@@ -7,6 +7,7 @@ local http = cosock.asyncify "socket.http"
 ltn12 = require("ltn12")
 
 local wiser = {}
+local room_command_handlers = require "room_command_handlers"
 
 -- callback to handle an `on` capability command
 function wiser.makeApiGetCall(driver,device,path)
@@ -60,4 +61,31 @@ function wiser.createRooms(driver,device)
     end
   end
 end
+function wiser.refreshRooms(driver,device)
+  local payload = wiser.makeApiGetCall(driver,device,"/data/domain/")
+  local wiserdata = json.decode(payload)
+  if wiserdata.Room ~= nil then
+    --the room object is not empty
+    for _, r in ipairs(wiserdata.Room) do
+      if(r.CalculatedTemperature == -32768) then
+        log.debug("Not Processing Room: "..r.Name.." Invalid Temperature")
+      else
+        log.debug("Processing Room: "..r.Name)
+        local device_list = driver:get_devices()
+        for _, d in ipairs(device_list) do
+          if (d.parent_device_id == device.id and d:component_exists("roomlogger")) then
+              --this is a child device, that is a room
+              local label_identifier = "room_"..r.id
+              if (label_identifier == d.vendor_provided_label) then
+                --this is the correct room
+                room_command_handlers.processUpdate(driver, d, r)
+              end
+          end
+        end
+      end
+    end
+  end
+end
+
+
 return wiser
