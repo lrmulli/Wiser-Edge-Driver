@@ -78,7 +78,16 @@ function wiser.refreshRooms(driver,device)
               local label_identifier = "room_"..r.id
               if (label_identifier == d.vendor_provided_label) then
                 --this is the correct room
-                room_command_handlers.processUpdate(driver, d, r)
+                if r.RoomStatId ~= nil then
+                  log.info(r.Name.." has a roomstat")
+                  for _, rs in ipairs(r.RoomStat) do
+                    if r.RoomStatId == rs.id then
+                      room_command_handlers.processUpdate(driver, d, r,rs)
+                    end
+                  end
+                else
+                  room_command_handlers.processUpdate(driver, d, r,{})
+                end
               end
           end
         end
