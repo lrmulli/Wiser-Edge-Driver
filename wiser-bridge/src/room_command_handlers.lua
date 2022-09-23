@@ -22,6 +22,10 @@ function room_command_handlers.switch_on(driver, device, command)
         device:emit_component_event(device.profile.components.roomlogger,logger.logger(utils.stringify_table(update,"Room Update Message: ",true)))
     end
     log.info(utils.stringify_table(update,"Room Update Message: ",true))
+    --set current temperature
+    local temp = update.CalculatedTemperature / 10
+    device:emit_component_event(device.profile.components.roomtemperature,capabilities.temperatureMeasurement.temperatureMeasurement(temp))
+
   end
 
 return room_command_handlers
