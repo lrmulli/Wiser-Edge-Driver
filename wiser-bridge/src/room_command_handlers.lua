@@ -2,6 +2,7 @@ local log = require "log"
 local capabilities = require "st.capabilities"
 local utils = require "st.utils"
 local room_command_handlers = {}
+local logger = capabilities["universevoice35900.log"]
 
 -- callback to handle an `on` capability command
 function room_command_handlers.switch_on(driver, device, command)
@@ -17,6 +18,9 @@ function room_command_handlers.switch_on(driver, device, command)
 
   function room_command_handlers.processUpdate(driver, device, update)
     log.debug(string.format("[%s] processing update message", device.device_network_id))
+    if (device.preferences.verboserecdlog == true) then
+        device:emit_event(logger.logger(utils.stringify_table(update,"Room Update Message: ",true)))
+    end
     log.info(utils.stringify_table(update,"Room Update Message: ",true))
   end
 
